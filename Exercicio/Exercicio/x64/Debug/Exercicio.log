@@ -1,0 +1,77 @@
+﻿  Competicao.cpp
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(7,1): error C2653: 'Competicao': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(7,47): error C2061: erro de sintaxe: identificador 'Data'
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(7,13): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(8,2): error C2355: 'this': é possível referenciar apenas dentro de funções de membro não estáticas ou inicializadores de membros de dados não estáticos
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(9,2): error C2355: 'this': é possível referenciar apenas dentro de funções de membro não estáticas ou inicializadores de membros de dados não estáticos
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(9,25): error C2065: 'DataCompeticao': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(10,1): warning C4508: 'Competicao': função deve retornar um valor; tipo de retorno 'void' assumido
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(12,6): error C2653: 'Competicao': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(13,2): error C2355: 'this': é possível referenciar apenas dentro de funções de membro não estáticas ou inicializadores de membros de dados não estáticos
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(16,6): error C2653: 'Competicao': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(17,36): error C2065: 'nomeCompeticao': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Competicao.cpp(18,2): error C2065: 'DataCompeticao': identificador não declarado
+  Corredor.cpp
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(7,1): error C2653: 'Corredor': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(7,53): error C2061: erro de sintaxe: identificador 'Competicao'
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(7,11): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(7,110): error C2065: 'c': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(7,113): error C2550: 'Corredor': listas de inicializadores de construtor são permitidas apenas em definições de construtor
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(7,114): warning C4508: 'Corredor': função deve retornar um valor; tipo de retorno 'void' assumido
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(9,6): error C2653: 'Corredor': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(10,2): error C2065: 'competicao': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(13,6): error C2653: 'Corredor': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(15,10): error C2352: 'Atleta::imprime_info': uma chamada de uma função membro não estática requer um objeto
+      C:\Users\gabri\source\repos\Exercicio\Exercicio\Atleta.h(17,7):
+      consulte a declaração de 'Atleta::imprime_info'
+  
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Corredor.cpp(16,22): error C2065: 'peso': identificador não declarado
+  Data.cpp
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(8,1): error C2653: 'Data': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(8,7): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(8,15): warning C4508: 'Data': função deve retornar um valor; tipo de retorno 'void' assumido
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(10,6): error C2653: 'Data': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(11,2): error C2355: 'this': é possível referenciar apenas dentro de funções de membro não estáticas ou inicializadores de membros de dados não estáticos
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(14,6): error C2653: 'Data': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(15,2): error C2355: 'this': é possível referenciar apenas dentro de funções de membro não estáticas ou inicializadores de membros de dados não estáticos
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(18,6): error C2653: 'Data': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(19,2): error C2355: 'this': é possível referenciar apenas dentro de funções de membro não estáticas ou inicializadores de membros de dados não estáticos
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(22,6): error C2653: 'Data': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(23,23): error C2065: 'dia': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(23,47): error C2065: 'dia': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(24,7): error C2065: 'mes': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(24,31): error C2065: 'mes': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Data.cpp(25,6): error C2065: 'ano': identificador não declarado
+  main.cpp
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(9,2): error C2065: 'Data': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(9,7): error C2146: erro de sintaxe: ';' ausente antes do identificador 'D'
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(9,7): error C3861: 'D': identificador não encontrado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(10,2): error C2065: 'Competicao': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(10,13): error C2146: erro de sintaxe: ';' ausente antes do identificador 'C'
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(10,32): error C2065: 'D': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(10,13): error C3861: 'C': identificador não encontrado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(11,2): error C2065: 'Nadador': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(11,10): error C2146: erro de sintaxe: ';' ausente antes do identificador 'N'
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(11,10): error C3861: 'N': identificador não encontrado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(12,2): error C2065: 'Corredor': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(12,11): error C2146: erro de sintaxe: ';' ausente antes do identificador 'corredor'
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(12,41): error C2065: 'C': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(12,11): error C3861: 'corredor': identificador não encontrado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(14,21): error C2065: 'N': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(15,21): error C2065: 'corredor': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(18,2): error C2065: 'N': identificador não declarado
+C:\Users\gabri\source\repos\Exercicio\Exercicio\main.cpp(23,2): error C2065: 'corredor': identificador não declarado
+  Nadador.cpp
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(7,1): error C2653: 'Nadador': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(7,10): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(7,104): error C2550: 'Nadador': listas de inicializadores de construtor são permitidas apenas em definições de construtor
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(7,105): warning C4508: 'Nadador': função deve retornar um valor; tipo de retorno 'void' assumido
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(10,6): error C2653: 'Nadador': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(11,2): error C2355: 'this': é possível referenciar apenas dentro de funções de membro não estáticas ou inicializadores de membros de dados não estáticos
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(14,6): error C2653: 'Nadador': não é um nome de classe ou de namespace
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(16,10): error C2352: 'Atleta::imprime_info': uma chamada de uma função membro não estática requer um objeto
+      C:\Users\gabri\source\repos\Exercicio\Exercicio\Atleta.h(17,7):
+      consulte a declaração de 'Atleta::imprime_info'
+  
+C:\Users\gabri\source\repos\Exercicio\Exercicio\Nadador.cpp(17,27): error C2065: 'Categoria': identificador não declarado
+  Gerando Código...

@@ -1,0 +1,4 @@
+﻿  FuncionarioCaixa.cpp
+C:\Users\gabri\source\repos\Calculadora\Calculadora\FuncionarioCaixa.cpp(38,15): warning C4244: 'return': conversão de 'double' para 'int', possível perda de dados
+C:\Users\gabri\source\repos\Calculadora\Calculadora\FuncionarioCaixa.cpp(42,15): warning C4244: 'return': conversão de 'double' para 'int', possível perda de dados
+  Calculadora.vcxproj -> C:\Users\gabri\source\repos\Calculadora\x64\Debug\Calculadora.exe
