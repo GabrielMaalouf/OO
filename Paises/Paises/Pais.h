@@ -2,43 +2,34 @@
 #define PAIS_H
 
 #include <string>
-#include <vector>
-
 using namespace std;
 
 class Pais {
 private:
-    string codigoISO;
     string nome;
+    string codigoISO;
     long long populacao;
     double dimensao;
-    vector<Pais*> fronteiras;
+
+    Pais* fronteiras[40];
+    int totalFronteiras;
 
 public:
-    // Construtor
-    Pais(const string& iso, const string& nome, double dimensao);
+    Pais(string codigo, string nome, double dimensao);
 
-    // Getters e Setters
-    string getCodigoISO() const;
-    void setCodigoISO(const string& iso);
-
-    string getNome() const;
-    void setNome(const string& nome);
-
-    long long getPopulacao() const;
-    void setPopulacao(long long populacao);
-
-    double getDimensao() const;
-    void setDimensao(double dimensao);
-
-    // Fronteiras
+    void setPopulacao(long long pop);
     void adicionarFronteira(Pais* pais);
 
-    // Verificações e cálculos
-    bool isEqual(const Pais& outro) const;
-    bool isLimitrofe(const Pais& outro) const;
-    double calcularDensidade() const;
-    vector<Pais*> vizinhosEmComum(const Pais& outro) const;
+    string getNome();
+    string getCodigoISO();
+    long long getPopulacao();
+    double getDimensao();
+    double calcularDensidade();
+
+    bool isIgual(Pais* outro);
+    bool isLimitrofe(Pais* outro);
+
+    void mostrarVizinhosEmComum(Pais* outro);
 };
 
 #endif
