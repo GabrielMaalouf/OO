@@ -4,92 +4,50 @@
 using namespace std;
 
 int main() {
-    // Criando países
-    Pais brasil("BRA", "Brasil", 8515767.049);
-    brasil.setPopulacao(193946886);
+    Pais* brasil = new Pais("BRA", "Brasil", 8515767);
+    brasil->setPopulacao(210000000);
 
-    Pais argentina("ARG", "Argentina", 2780400);
-    argentina.setPopulacao(45195774);
+    Pais* argentina = new Pais("ARG", "Argentina", 2780400);
+    argentina->setPopulacao(45000000);
 
-    Pais paraguai("PRY", "Paraguai", 406752);
-    paraguai.setPopulacao(7132530);
+    Pais* paraguai = new Pais("PRY", "Paraguai", 406752);
+    paraguai->setPopulacao(7000000);
 
-    Pais uruguai("URY", "Uruguai", 176215);
-    uruguai.setPopulacao(3473730);
+    Pais* uruguai = new Pais("URY", "Uruguai", 176215);
+    uruguai->setPopulacao(3400000);
 
-    Pais bolivia("BOL", "Bolívia", 1098581);
-    bolivia.setPopulacao(11673021);
+    // Definindo fronteiras
+    brasil->adicionarFronteira(argentina);
+    brasil->adicionarFronteira(paraguai);
+    brasil->adicionarFronteira(uruguai);
 
-    Pais peru("PER", "Peru", 1285216);
-    peru.setPopulacao(32971846);
+    argentina->adicionarFronteira(brasil);
+    argentina->adicionarFronteira(paraguai);
+    argentina->adicionarFronteira(uruguai);
 
-    Pais colombia("COL", "Colômbia", 1138914);
-    colombia.setPopulacao(50882884);
+    paraguai->adicionarFronteira(brasil);
+    paraguai->adicionarFronteira(argentina);
 
-    Pais venezuela("VEN", "Venezuela", 916445);
-    venezuela.setPopulacao(28435943);
+    uruguai->adicionarFronteira(brasil);
+    uruguai->adicionarFronteira(argentina);
 
-    // Adicionando fronteiras
-    brasil.adicionarFronteira(&argentina);
-    brasil.adicionarFronteira(&paraguai);
-    brasil.adicionarFronteira(&uruguai);
-    brasil.adicionarFronteira(&bolivia);
-    brasil.adicionarFronteira(&peru);
-    brasil.adicionarFronteira(&colombia);
-    brasil.adicionarFronteira(&venezuela);
+    // Testes
+    cout << "Densidade populacional do Brasil: " 
+         << brasil->calcularDensidade() << " hab/kmÂ²\n";
 
-    argentina.adicionarFronteira(&brasil);
-    argentina.adicionarFronteira(&uruguai);
-    argentina.adicionarFronteira(&paraguai);
-    argentina.adicionarFronteira(&bolivia);
-
-    paraguai.adicionarFronteira(&brasil);
-    paraguai.adicionarFronteira(&argentina);
-    paraguai.adicionarFronteira(&bolivia);
-
-    uruguai.adicionarFronteira(&brasil);
-    uruguai.adicionarFronteira(&argentina);
-
-    bolivia.adicionarFronteira(&brasil);
-    bolivia.adicionarFronteira(&argentina);
-    bolivia.adicionarFronteira(&paraguai);
-    bolivia.adicionarFronteira(&peru);
-
-    peru.adicionarFronteira(&brasil);
-    peru.adicionarFronteira(&bolivia);
-    peru.adicionarFronteira(&colombia);
-
-    colombia.adicionarFronteira(&brasil);
-    colombia.adicionarFronteira(&peru);
-    colombia.adicionarFronteira(&venezuela);
-
-    venezuela.adicionarFronteira(&brasil);
-    venezuela.adicionarFronteira(&colombia);
-
-    // Exemplo de uso
-    cout << "Densidade populacional do Brasil: "
-        << brasil.calcularDensidade() << " hab/km²" << endl;
-
-    cout << "Brasil e Uruguai são limítrofes? "
-        << (brasil.isLimitrofe(uruguai) ? "Sim" : "Não") << endl;
-
-    vector<Pais*> comuns = brasil.vizinhosEmComum(argentina);
-    cout << "\nVizinhos em comum entre Brasil e Argentina:" << endl;
-    for (Pais* pais : comuns) {
-        cout << "- " << pais->getNome() << endl;
+    if (brasil->isLimitrofe(uruguai)) {
+        cout << "Brasil e Uruguai sÃ£o paÃ­ses vizinhos.\n";
+    } else {
+        cout << "Brasil e Uruguai NÃƒO sÃ£o paÃ­ses vizinhos.\n";
     }
 
-    comuns = peru.vizinhosEmComum(colombia);
-    cout << "\nVizinhos em comum entre Peru e Colômbia:" << endl;
-    for (Pais* pais : comuns) {
-        cout << "- " << pais->getNome() << endl;
-    }
+    brasil->mostrarVizinhosEmComum(argentina);
 
-    comuns = bolivia.vizinhosEmComum(paraguai);
-    cout << "\nVizinhos em comum entre Bolívia e Paraguai:" << endl;
-    for (Pais* pais : comuns) {
-        cout << "- " << pais->getNome() << endl;
-    }
+    // Liberando memÃ³ria
+    delete brasil;
+    delete argentina;
+    delete paraguai;
+    delete uruguai;
 
     return 0;
 }
