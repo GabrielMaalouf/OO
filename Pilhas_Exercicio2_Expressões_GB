@@ -1,0 +1,118 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Classe Pilha para armazenar símbolos
+class Pilha {
+private:
+    char* dados;
+    int topo;
+    int capacidade;
+
+    void aumentarCapacidade() {
+        int novaCapacidade = capacidade * 2;
+        char* novoArray = new char[novaCapacidade];
+
+        for (int i = 0; i <= topo; i++) {
+            novoArray[i] = dados[i];
+        }
+
+        delete[] dados;
+        dados = novoArray;
+        capacidade = novaCapacidade;
+    }
+
+public:
+    Pilha() {
+        capacidade = 10;
+        dados = new char[capacidade];
+        topo = -1;
+    }
+
+    ~Pilha() {
+        delete[] dados;
+    }
+
+    void push(char c) {
+        if (topo == capacidade - 1) {
+            aumentarCapacidade();
+        }
+        dados[++topo] = c;
+    }
+
+    bool pop(char& c) {
+        if (vazia()) return false;
+        c = dados[topo--];
+        return true;
+    }
+
+    bool vazia() {
+        return topo == -1;
+    }
+
+    char topoElemento() {
+        if (!vazia())
+            return dados[topo];
+        return '\0';
+    }
+};
+
+// Função que verifica se os caracteres combinam
+bool combinam(char abertura, char fechamento) {
+    return (abertura == '(' && fechamento == ')') ||
+           (abertura == '[' && fechamento == ']') ||
+           (abertura == '{' && fechamento == '}');
+}
+
+// Função para verificar balanceamento
+bool verificarBalanceamento(const string& expressao) {
+    Pilha pilha;
+    for (int i = 0; i < expressao.length(); i++) {
+        char c = expressao[i];
+        if (c == '(' || c == '[' || c == '{') {
+            pilha.push(c);
+        } else if (c == ')' || c == ']' || c == '}') {
+            char topo;
+            if (!pilha.pop(topo)) {
+                cout << "Erro: simbolo '" << c << "' fechado sem abertura na posicao " << i << endl;
+                return false;
+            }
+            if (!combinam(topo, c)) {
+                cout << "Erro: simbolo '" << topo << "' aberto nao combina com '" << c << "' fechado na posicao " << i << endl;
+                return false;
+            }
+        }
+    }
+
+    if (!pilha.vazia()) {
+        cout << "Erro: simbolo(s) aberto(s) nao foram fechados corretamente." << endl;
+        return false;
+    }
+
+    return true;
+}
+
+// Função principal com repetição
+int main() {
+    string expressao;
+    char continuar;
+
+    do {
+        cout << "Digite uma expressao: ";
+        getline(cin, expressao);
+
+        if (verificarBalanceamento(expressao)) {
+            cout << "Expressao balanceada!" << endl;
+        } else {
+            cout << "Expressao NAO esta balanceada." << endl;
+        }
+
+        cout << "\nDeseja verificar outra expressao? (s/n): ";
+        cin >> continuar;
+        cin.ignore(); // Limpar o '\n' pendente do buffer
+
+        cout << "--------------------------------------\n";
+    } while (continuar == 's' || continuar == 'S');
+
+    return 0;
+}
