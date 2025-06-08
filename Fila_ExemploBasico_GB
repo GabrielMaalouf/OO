@@ -1,0 +1,71 @@
+#include <iostream>
+#define MAX 100
+
+class Fila {
+private:
+    int arr[MAX];
+    int frente;
+    int tras;
+
+public:
+    Fila() {
+        frente = 0;
+        tras = -1;
+    }
+
+    bool isEmpty() {
+        return frente > tras;
+    }
+
+    bool isFull() {
+        return tras == MAX - 1;
+    }
+
+    void enqueue(int valor) {
+        if (isFull()) {
+            std::cout << "Fila cheia!\n";
+            return;
+        }
+        tras++;
+        arr[tras] = valor;
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            std::cout << "Fila vazia!\n";
+            return;
+        }
+        frente++;
+    }
+
+    int front() {
+        if (isEmpty()) {
+            std::cout << "Fila vazia!\n";
+            return -1;
+        }
+        return arr[frente];
+    }
+
+    void mostrar() {
+        if (isEmpty()) {
+            std::cout << "Fila vazia!\n";
+            return;
+        }
+        for (int i = frente; i <= tras; i++) {
+            std::cout << arr[i] << " ";
+        }
+        std::cout << "\n";
+    }
+};
+
+int main() {
+    Fila f;
+    f.enqueue(10);
+    f.enqueue(20);
+    f.enqueue(30);
+    f.mostrar();        // Deve exibir: 10 20 30
+    f.dequeue();
+    f.mostrar();        // Deve exibir: 20 30
+    std::cout << "Frente: " << f.front() << "\n";  // Deve exibir: 20
+    return 0;
+}
