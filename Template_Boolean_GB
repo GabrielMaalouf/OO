@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+template <typename T>
+void imprime(T a, T b) {
+    cout << "Soma: " << (a + b) << endl;
+}
+
+template <>
+void imprime<bool>(bool a, bool b) {
+    cout << "Soma (OU lógico): " << (a || b) << endl;
+}
+
+int main() {
+    imprime(10, 20);           // int → soma normal: 30
+    imprime(3.5, 4.5);         // double → soma normal: 8.0
+    imprime(true, false);      // bool → OU lógico: true
+    imprime(false, false);     // bool → OU lógico: false
+
+    return 0;
+}
