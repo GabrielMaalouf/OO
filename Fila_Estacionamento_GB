@@ -1,0 +1,132 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+struct Carro {
+    std::string placa;
+    Carro* proximo;
+};
+
+class Estacionamento {
+private:
+    Carro* frente;
+    Carro* tras;
+
+public:
+    Estacionamento() {
+        frente = nullptr;
+        tras = nullptr;
+    }
+
+    bool isEmpty() {
+        return frente == nullptr;
+    }
+
+    void entrarCarro(std::string placa) {
+        Carro* novo = new Carro{placa, nullptr};
+        if (isEmpty()) {
+            frente = tras = novo;
+        } else {
+            tras->proximo = novo;
+            tras = novo;
+        }
+        std::cout << "Carro com placa " << placa << " entrou no estacionamento.\n";
+    }
+
+    void sairCarro(std::string placaAlvo) {
+        if (isEmpty()) {
+            std::cout << "Estacionamento vazio!\n";
+            return;
+        }
+
+        bool encontrou = false;
+        int tamanho = contarCarros();
+
+        for (int i = 0; i < tamanho; ++i) {
+            std::string placaAtual = frente->placa;
+            if (placaAtual == placaAlvo) {
+                removerFrente(); // Remove o carro com a placa
+                std::cout << "Carro com placa " << placaAlvo << " saiu do estacionamento.\n";
+                encontrou = true;
+                break;
+            } else {
+                // Dá a volta na quadra
+                std::string temp = frente->placa;
+                removerFrente();
+                entrarCarro(temp); // volta pro fim da fila
+            }
+        }
+
+        if (!encontrou) {
+            std::cout << "Carro com placa " << placaAlvo << " não está no estacionamento.\n";
+        }
+    }
+
+    void removerFrente() {
+        if (isEmpty()) return;
+
+        Carro* temp = frente;
+        frente = frente->proximo;
+        if (frente == nullptr) tras = nullptr;
+        delete temp;
+    }
+
+    int contarCarros() {
+        int count = 0;
+        Carro* atual = frente;
+        while (atual != nullptr) {
+            count++;
+            atual = atual->proximo;
+        }
+        return count;
+    }
+
+    void mostrar() {
+        if (isEmpty()) {
+            std::cout << "Estacionamento vazio.\n";
+            return;
+        }
+        std::cout << "Estado atual do estacionamento (frente → fundo):\n";
+        Carro* atual = frente;
+        while (atual != nullptr) {
+            std::cout << atual->placa << " ";
+            atual = atual->proximo;
+        }
+        std::cout << "\n";
+    }
+
+    ~Estacionamento() {
+        while (!isEmpty()) removerFrente();
+    }
+};
+
+// ---------------- MAIN ----------------
+
+int main() {
+    Estacionamento est;
+    char opcao;
+
+    do {
+        std::cout << "\nOpções:\n[E] Entrar carro\n[R] Retirar carro\n[S] Mostrar estacionamento\n[Q] Sair\nEscolha: ";
+        std::cin >> opcao;
+        opcao = std::toupper(opcao);
+
+        if (opcao == 'E') {
+            std::string placa;
+            std::cout << "Informe a placa do carro: ";
+            std::cin >> placa;
+            est.entrarCarro(placa);
+        } else if (opcao == 'R') {
+            std::string placa;
+            std::cout << "Informe a placa do carro a ser removido: ";
+            std::cin >> placa;
+            est.sairCarro(placa);
+        } else if (opcao == 'S') {
+            est.mostrar();
+        }
+
+    } while (opcao != 'Q');
+
+    std::cout << "Encerrando programa...\n";
+    return 0;
+}
