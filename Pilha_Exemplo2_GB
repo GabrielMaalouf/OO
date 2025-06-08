@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+
+class Pilha {
+private:
+    int topo;
+    static const int capacidade = 100;
+    int dados[capacidade];
+
+public:
+    Pilha() {
+        topo = -1;
+    }
+
+    bool vazia() {
+        return topo == -1;
+    }
+
+    bool cheia() {
+        return topo == capacidade - 1;
+    }
+
+    void push(int valor) {
+        if (cheia()) {
+            cout << "Erro: pilha cheia!" << endl;
+        } else {
+            dados[++topo] = valor;
+        }
+    }
+
+    void pop() {
+        if (vazia()) {
+            cout << "Erro: pilha vazia!" << endl;
+        } else {
+            topo--;
+        }
+    }
+
+    int top() {
+        if (vazia()) {
+            cout << "Erro: pilha vazia!" << endl;
+            return -1;  // valor inválido
+        } else {
+            return dados[topo];
+        }
+    }
+
+    int tamanho() {
+        return topo + 1;
+    }
+
+    // Função que procura um valor na pilha
+    bool find(int valor) {
+        for (int i = topo; i >= 0; i--) {
+            if (dados[i] == valor) {
+                return true; // encontrado
+            }
+        }
+        return false; // não encontrado
+    }
+};
+
+int main() {
+    Pilha p;
+
+    p.push(10);
+    p.push(20);
+    p.push(30);
+
+    cout << "Topo da pilha: " << p.top() << endl;
+
+    cout << "Procurar 20: " << (p.find(20) ? "Encontrado" : "Nao encontrado") << endl;
+    cout << "Procurar 40: " << (p.find(40) ? "Encontrado" : "Nao encontrado") << endl;
+
+    p.pop();
+
+    cout << "Topo apos pop: " << p.top() << endl;
+
+    return 0;
+}
