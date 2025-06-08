@@ -1,0 +1,81 @@
+#include <iostream>
+#include <cstdlib>  // rand, srand
+#include <ctime>    // time
+using namespace std;
+
+// Pilha simples com array
+class Pilha {
+private:
+    int topo;
+    int dados[1000];  // capacidade máxima
+
+public:
+    Pilha() {
+        topo = -1;
+    }
+
+    bool cheia() {
+        return topo == 999;
+    }
+
+    bool vazia() {
+        return topo == -1;
+    }
+
+    void push(int valor) {
+        if (!cheia()) {
+            dados[++topo] = valor;
+        }
+    }
+
+    void pop() {
+        if (!vazia()) {
+            topo--;
+        }
+    }
+
+    int tamanho() {
+        return topo + 1;
+    }
+};
+
+int gerarAleatorio(int minimo, int maximo) {
+    return rand() % (maximo - minimo + 1) + minimo;
+}
+
+int main() {
+    srand(time(0)); // inicializa a semente aleatória
+
+    int turnos;
+    cout << "Informe o numero de turnos: ";
+    cin >> turnos;
+
+    Pilha pilhaPratos;
+
+    for (int t = 1; t <= turnos; t++) {
+        int lavados = gerarAleatorio(1, 5); // pratos lavados neste turno
+        int secos   = gerarAleatorio(1, 3); // pratos secos neste turno
+
+        cout << "\nTurno " << t << ":\n";
+        cout << "  Pratos lavados: " << lavados << endl;
+        cout << "  Pratos secos:   " << secos << endl;
+
+        // Adiciona pratos lavados à pilha
+        for (int i = 0; i < lavados; i++) {
+            pilhaPratos.push(1);  // só precisamos marcar que um prato foi lavado
+        }
+
+        // Remove pratos secos da pilha
+        for (int i = 0; i < secos; i++) {
+            if (!pilhaPratos.vazia()) {
+                pilhaPratos.pop();
+            } else {
+                break;
+            }
+        }
+    }
+
+    cout << "\nTotal de pratos lavados mas ainda nao secos: " << pilhaPratos.tamanho() << endl;
+
+    return 0;
+}
