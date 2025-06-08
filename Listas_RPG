@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+struct Combatente {
+    string nome;
+    int iniciativa;
+    Combatente* next;
+};
+
+// Insere em ordem decrescente de iniciativa
+void inserirOrdenado(Combatente*& head, string nome, int iniciativa) {
+    Combatente* novo = new Combatente{nome, iniciativa, nullptr};
+
+    // Inserir no início se a lista estiver vazia ou a iniciativa for maior que a do head
+    if (head == nullptr || iniciativa > head->iniciativa) {
+        novo->next = head;
+        head = novo;
+        return;
+    }
+
+    // Procurar a posição correta (mantém ordem de chegada em caso de empate)
+    Combatente* atual = head;
+    while (atual->next != nullptr && atual->next->iniciativa >= iniciativa) {
+        atual = atual->next;
+    }
+
+    novo->next = atual->next;
+    atual->next = novo;
+}
+
+void imprimirLista(Combatente* head) {
+    cout << "\nOrdem de combate:\n";
+    while (head != nullptr) {
+        cout << head->nome << " - Iniciativa: " << head->iniciativa << endl;
+        head = head->next;
+    }
+}
+
+int main() {
+    srand(time(0)); // inicializa aleatoriedade
+
+    string nomes[10] = {
+        "Arthas", "Luna", "Grom", "Sylvanas", "Thrall",
+        "Jaina", "Varian", "Tyrande", "Illidan", "Kael"
+    };
+
+    Combatente* lista = nullptr;
+
+    // Gerar iniciativa e inserir ordenado
+    for (int i = 0; i < 10; ++i) {
+        int iniciativa = rand() % 10 + 1; // 1 a 10
+        cout << nomes[i] << " tirou " << iniciativa << " de iniciativa." << endl;
+        inserirOrdenado(lista, nomes[i], iniciativa);
+    }
+
+    imprimirLista(lista);
+
+    return 0;
+}
