@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+// Template da classe
+template <typename T>
+class Calculadora {
+public:
+    T soma(T a, T b) {
+        return a + b;
+    }
+
+    T subtrai(T a, T b) {
+        return a - b;
+    }
+
+    T multiplica(T a, T b) {
+        return a * b;
+    }
+
+    T divide(T a, T b) {
+        if (b == 0) {
+            cout << "Erro: divisão por zero!" << endl;
+            return 0;
+        }
+        return a / b;
+    }
+};
+
+// Função principal
+int main() {
+    Calculadora<int> calcInt;
+    cout << "INT: 10 + 3 = " << calcInt.soma(10, 3) << endl;
+    cout << "INT: 10 - 3 = " << calcInt.subtrai(10, 3) << endl;
+    cout << "INT: 10 * 3 = " << calcInt.multiplica(10, 3) << endl;
+    cout << "INT: 10 / 3 = " << calcInt.divide(10, 3) << endl;
+
+    cout << endl;
+
+    Calculadora<float> calcFloat;
+    cout << "FLOAT: 10.5 + 2.3 = " << calcFloat.soma(10.5f, 2.3f) << endl;
+    cout << "FLOAT: 10.5 / 2.0 = " << calcFloat.divide(10.5f, 2.0f) << endl;
+
+    cout << endl;
+
+    Calculadora<double> calcDouble;
+    cout << "DOUBLE: 100.123 + 200.456 = " << calcDouble.soma(100.123, 200.456) << endl;
+
+    return 0;
+}
