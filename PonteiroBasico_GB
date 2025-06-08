@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+void dobrarValor(int* ptr){
+    *ptr *= 2;
+}
+
+int main(){
+    int numero = 10;
+    dobrarValor(&numero);
+    cout << "Dobrado " << numero << endl;
+    return 0;
+}
