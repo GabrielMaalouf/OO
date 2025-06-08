@@ -1,0 +1,99 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+class PilhaDinamica {
+private:
+    int* dados;       // ponteiro para array dinâmico
+    int topo;         // índice do topo
+    int capacidade;   // capacidade atual do array
+
+    // função para aumentar a capacidade da pilha
+    void aumentarCapacidade() {
+        int novaCapacidade = capacidade * 2;
+        int* novoArray = new int[novaCapacidade];
+
+        // copia os dados antigos para o novo array
+        for (int i = 0; i <= topo; i++) {
+            novoArray[i] = dados[i];
+        }
+
+        // libera o array antigo e aponta para o novo
+        delete[] dados;
+        dados = novoArray;
+        capacidade = novaCapacidade;
+    }
+
+public:
+    PilhaDinamica() {
+        capacidade = 10;          // capacidade inicial
+        dados = new int[capacidade];
+        topo = -1;
+    }
+
+    ~PilhaDinamica() {
+        delete[] dados;           // liberar memória ao destruir objeto
+    }
+
+    bool vazia() {
+        return topo == -1;
+    }
+
+    void push() {
+        if (topo == capacidade - 1) {
+            // pilha cheia, aumentar capacidade
+            aumentarCapacidade();
+        }
+        topo++;
+        dados[topo] = 1;  // valor arbitrário para prato
+    }
+
+    bool pop() {
+        if (vazia()) {
+            return false;
+        }
+        topo--;
+        return true;
+    }
+
+    int tamanho() {
+        return topo + 1;
+    }
+};
+
+int main() {
+    srand(time(0));
+
+    PilhaDinamica pia;
+
+    int turnos;
+    cout << "Informe o total de turnos: ";
+    cin >> turnos;
+
+    for (int t = 1; t <= turnos; t++) {
+        int pratosLavados = rand() % 5 + 1;
+        int pratosSecados = rand() % 3 + 1;
+
+        cout << "Turno " << t << ": Lavador lava " << pratosLavados << " pratos." << endl;
+        cout << "Turno " << t << ": Secador seca " << pratosSecados << " pratos." << endl;
+
+        for (int i = 0; i < pratosLavados; i++) {
+            pia.push();
+        }
+
+        for (int i = 0; i < pratosSecados; i++) {
+            if (!pia.pop()) {
+                cout << "Nao ha pratos para secar no turno " << t << endl;
+                break;
+            }
+        }
+
+        cout << "Pratos lavados mas nao secos na pilha: " << pia.tamanho() << endl << endl;
+    }
+
+    cout << "Simulacao terminada." << endl;
+    cout << "Total de pratos lavados e nao secos: " << pia.tamanho() << endl;
+
+    return 0;
+}
