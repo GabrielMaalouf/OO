@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+bool ehPalindromo(char palavra[], int tamanho) {
+    // Implementar pilha usando array
+    char pilha[100];
+    int topo = -1;
+
+    // Empilha todos os caracteres da palavra
+    for (int i = 0; i < tamanho; i++) {
+        pilha[++topo] = palavra[i];
+    }
+
+    // Desempilha e compara com a palavra original
+    for (int i = 0; i < tamanho; i++) {
+        if (pilha[topo--] != palavra[i]) {
+            return false; // Não é palíndromo
+        }
+    }
+
+    return true; // É palíndromo
+}
+
+int main() {
+    char palavra[100];
+    cout << "Digite a palavra: ";
+    cin >> palavra;
+
+    // Calcular tamanho da palavra (sem usar strlen)
+    int tamanho = 0;
+    while (palavra[tamanho] != '\0') {
+        tamanho++;
+    }
+
+    if (ehPalindromo(palavra, tamanho)) {
+        cout << "A palavra é um palindromo!" << endl;
+    } else {
+        cout << "A palavra nao é um palindromo!" << endl;
+    }
+
+    return 0;
+}
