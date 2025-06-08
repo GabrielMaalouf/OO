@@ -1,0 +1,171 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+// Estrutura da carta
+struct Carta {
+    string valor;
+    string naipe;
+};
+
+// Nó da lista de cartas retiradas
+struct No {
+    Carta carta;
+    No* next;
+};
+
+// Função para criar o baralho com 52 cartas
+void criarBaralho(Carta baralho[], int tamanho) {
+    string valores[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valete", "Dama", "Rei"};
+    string naipes[] = {"Ouros", "Espadas", "Copas", "Paus"};
+    int index = 0;
+
+    for (int i = 0; i < 13; i++) {
+        for (int j = 0; j < 4; j++) {
+            baralho[index].valor = valores[i];
+            baralho[index].naipe = naipes[j];
+            index++;
+        }
+    }
+}
+
+// Embaralhar o baralho
+void embaralhar(Carta baralho[], int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        int r = rand() % tamanho;
+        swap(baralho[i], baralho[r]);
+    }
+}
+
+// Exibe a lista de cartas retiradas
+void exibirLista(No* head) {
+    int index = 0;
+    while (head != nullptr) {
+        cout << index << " - " << head->carta.valor << " de " << head->carta.naipe << endl;
+        head = head->next;
+        index++;
+    }
+}
+
+// Insere no final da lista
+void inserirFim(No*& head, Carta carta) {
+    No* novo = new No{carta, nullptr};
+
+    if (head == nullptr) {
+        head = novo;
+    } else {
+        No* atual = head;
+        while (atual->next != nullptr) {
+            atual = atual->next;
+        }
+        atual->next = novo;
+    }
+}
+
+// Insere em posição específica da lista
+void inserirPosicao(No*& head, Carta carta, int pos) {
+    No* novo = new No{carta, nullptr};
+
+    if (pos <= 0 || head == nullptr) {
+        novo->next = head;
+        head = novo;
+        return;
+    }
+
+    No* atual = head;
+    int i = 0;
+    while (atual->next != nullptr && i < pos - 1) {
+        atual = atual->next;
+        i++;
+    }
+
+    novo->next = atual->next;
+    atual->next = novo;
+}
+
+// Função principal
+int main() {
+    srand(time(0));
+    const int TAM = 52;
+    Carta baralho[TAM];
+    int topo = TAM - 1;  // Pilha no topo do baralho
+
+    No* listaCartas = nullptr;
+
+    criarBaralho(baralho, TAM);
+    embaralhar(baralho, TAM);
+
+    int opcao;
+
+    do {
+        cout << "\n--- Menu ---\n";
+        cout << "1. Retirar uma carta do baralho\n";
+        cout << "2. Visualizar cartas retiradas\n";
+        cout << "3. Inserir última carta retirada em nova posição\n";
+        cout << "0. Sair\n";
+        cout << "Escolha: ";
+        cin >> opcao;
+
+        switch (opcao) {
+            case 1:
+                if (topo >= 0) {
+                    cout << "Carta retirada: " << baralho[topo].valor << " de " << baralho[topo].naipe << endl;
+                    inserirFim(listaCartas, baralho[topo]);
+                    topo--;
+                } else {
+                    cout << "Baralho vazio!\n";
+                }
+                break;
+
+            case 2:
+                cout << "\nCartas retiradas:\n";
+                exibirLista(listaCartas);
+                break;
+
+            case 3:
+                if (listaCartas == nullptr) {
+                    cout << "Nenhuma carta retirada ainda!\n";
+                    break;
+                }
+
+                int pos;
+                cout << "Em qual posição deseja inserir a última carta retirada? ";
+                cin >> pos;
+
+                // Remover última carta da lista e reinserir na nova posição
+                {
+                    // Remover última carta
+                    No* atual = listaCartas;
+                    No* anterior = nullptr;
+
+                    while (atual->next != nullptr) {
+                        anterior = atual;
+                        atual = atual->next;
+                    }
+
+                    Carta cartaTemp = atual->carta;
+                    if (anterior != nullptr) anterior->next = nullptr;
+                    else listaCartas = nullptr;
+
+                    delete atual;
+
+                    // Inserir na nova posição
+                    inserirPosicao(listaCartas, cartaTemp, pos);
+                    cout << "Carta inserida na posição " << pos << ".\n";
+                }
+                break;
+
+            case 0:
+                cout << "Encerrando...\n";
+                break;
+
+            default:
+                cout << "Opção inválida!\n";
+        }
+
+    } while (opcao != 0);
+
+    return 0;
+}
