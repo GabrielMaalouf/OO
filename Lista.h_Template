@@ -1,0 +1,127 @@
+#include <iostream>
+#include "Nodo.h"
+
+//Lista duplamente encadeada
+
+using namespace std;
+
+template<class T>
+class Lista{
+    public:
+        Lista();
+        void insere(T valor);
+        bool insere(T valor, int posicao);
+        Nodo<T>* encontrar(T valor);
+        void remover(T valor);
+        int getSize();
+        void printLista();
+    private:
+        int tamanhoDaLista;
+        Nodo<T>* primeiroDaLista;
+        Nodo<T>* ultimoDaLista;
+};
+
+template<class T>
+Lista<T>::Lista(){
+    this->tamanhoDaLista = 0;
+    this->primeiroDaLista = nullptr;
+    this->ultimoDaLista = nullptr;
+}
+
+template<class T>
+void Lista<T>::insere(T valor){
+    Nodo<T> *novoNodo = new Nodo<T>(valor);
+    if(tamanhoDaLista > 0){
+        ultimoDaLista->setProximo(novoNodo);
+        novoNodo->setAnterior(ultimoDaLista);   
+    } else {
+        primeiroDaLista = novoNodo;
+    }
+    ultimoDaLista = novoNodo;
+    tamanhoDaLista++;
+}
+
+template<class T>
+bool Lista<T>::insere(T valor, int posicao){
+    Nodo<T> *novoNodo = new Nodo<T>(valor);
+    Nodo<T> *nodoIteracao = primeiroDaLista;
+
+    if(posicao == 0){
+        novoNodo->setProximo(primeiroDaLista);
+        primeiroDaLista->setAnterior(novoNodo);
+        primeiroDaLista = novoNodo;
+        tamanhoDaLista++;
+        return true;
+    } else if(posicao == tamanhoDaLista) {
+        novoNodo->setAnterior(ultimoDaLista);
+        ultimoDaLista->setProximo(novoNodo);
+        ultimoDaLista = novoNodo;
+        tamanhoDaLista++;
+        return true;
+
+    }   
+
+    for(int i = 0; i < tamanhoDaLista; i++){
+        if(posicao == i){
+            //insere nodo
+            Nodo<T> *anteriorDoNodoIteracao = nodoIteracao->getAnterior();
+            novoNodo->setAnterior(anteriorDoNodoIteracao);
+            novoNodo->setProximo(nodoIteracao);
+            //ajeita nodo anterior e proximo
+            nodoIteracao->setAnterior(novoNodo);
+            anteriorDoNodoIteracao->setProximo(novoNodo);
+            tamanhoDaLista++;
+            return true;
+        }
+        nodoIteracao = nodoIteracao->getProximo();
+    }
+    return false;
+}
+
+template<class T>
+Nodo<T>* Lista<T>::encontrar(T valor){
+    Nodo<T> *nodoIteracao = primeiroDaLista;
+    
+    for(int i = 0; i < tamanhoDaLista; i++){
+        if(nodoIteracao->getElemento() == valor) return nodoIteracao;
+        nodoIteracao = nodoIteracao->getProximo();
+    }
+
+    return nullptr;
+}
+
+template<class T>
+void Lista<T>::remover(T valor){
+    Nodo<T> *nodoParaRemover = encontrar(valor);
+
+    if(nodoParaRemover == nullptr) return;
+
+    if(nodoParaRemover == ultimoDaLista){
+        nodoParaRemover->getAnterior()->setProximo(nullptr);
+        ultimoDaLista = nodoParaRemover->getAnterior();
+    } else if(nodoParaRemover == primeiroDaLista){
+        nodoParaRemover->getProximo()->setAnterior(nullptr);    
+        primeiroDaLista = nodoParaRemover->getProximo();
+    } else {
+        nodoParaRemover->getAnterior()->setProximo(nodoParaRemover->getProximo());
+        nodoParaRemover->getProximo()->setAnterior(nodoParaRemover->getAnterior());
+    }
+
+    tamanhoDaLista--;
+
+}
+
+template<class T>
+int Lista<T>::getSize(){
+    return tamanhoDaLista;
+}
+
+template<class T>
+void Lista<T>::printLista(){
+    Nodo<T> *nodoIterativo = primeiroDaLista;
+    cout << "Imprimindo lista:"  << endl;
+    for(int i = 0; i < tamanhoDaLista; i++){
+        cout << nodoIterativo->getElemento() << endl;
+        nodoIterativo = nodoIterativo->getProximo();
+    }
+}
